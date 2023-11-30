@@ -1,0 +1,12 @@
+.centerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "arial", serif;
+    height: 100vh;
+}
+
+body{
+    background-color: whitesmoke;
+}

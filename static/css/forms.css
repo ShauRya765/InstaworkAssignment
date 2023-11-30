@@ -1,0 +1,53 @@
+/* styles.css */
+/* Add your custom styles for input elements here */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    width: 25%;
+    /*text-align: center;*/
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Example styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    /* Add more styles as needed */
+}
+
+/* Add styles for your buttons */
+.btn {
+    /* Add button styles */
+}
+
+.btn-primary {
+    /* Add styles for primary button */
+}
+
+.btn-secondary {
+    /* Add styles for secondary button */
+}
+
+
+.title {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: lightslategrey;
+}

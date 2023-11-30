@@ -1,0 +1,48 @@
+.text {
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+.list_div {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    width: 20%;
+    /*text-align: center;*/
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.line {
+    height: 2px;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 25px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: lightslategrey;
+}
+
+.add {
+    color: blue;
+    text-decoration: none;
+}

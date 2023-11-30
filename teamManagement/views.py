@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from .forms import TeamMemberForm
 from .models import TeamMember
 
 
@@ -9,5 +9,32 @@ from .models import TeamMember
 
 class TeamListView(ListView):
     model = TeamMember
-    template_name = 'teamManangement/team_members.html'
+    template_name = 'teamManagement/team_list.html'
     context_object_name = 'team_members'
+
+
+class TeamAddView(CreateView):
+    model = TeamMember
+    form_class = TeamMemberForm
+    template_name = 'teamManagement/edit_member.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
+
+
+class TeamEditView(UpdateView):
+    model = TeamMember
+    form_class = TeamMemberForm
+    template_name = 'teamManagement/edit_member.html'
+    success_url = '/'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(TeamMember, id=self.kwargs['member_id'])
+
+
+class TeamDeleteView(DeleteView):
+    model = TeamMember
+    template_name = 'teamManagement/edit_member.html'  # Create a delete confirmation template
+    success_url = '/'
