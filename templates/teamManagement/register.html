@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Team Management!</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+</head>
+<body>
+<div class="form-container-parent">
+    <div class="form-container">
+        <h3 style="text-align: center; padding-top: 10px;">Sign Up</h3>
+        <form class="register-form" method="post" enctype="multipart/form-data">
+            {{ form.non_field_errors | safe }}
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+                {{ form.email.errors | safe }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">First name:</label>
+                {{ form.first_name }}
+                {{ form.first_name.errors | safe }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+                {{ form.last_name }}
+                {{ form.last_name.errors | safe }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Password:</label>
+                {{ form.password1 }}
+                {{ form.password1.errors | safe }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+                {{ form.password2 }}
+                {{ form.password2.errors | safe }}
+            </div>
+            <br>
+            <div class="flex-container">
+                <button type="submit" class="btn btn-primary button">Signup</button>
+            </div>
+        </form>
+        <p class="login-link">Already have an account? <a href="{% url 'teamManagement:login' %}">Login</a></p>
+    </div>
+</div>
+</body>

@@ -4,27 +4,54 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/team_list.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="hero">
-        <div class="title">
-            <div>
-                Team members
+    {% if user.is_authenticated %}
+        {% if user.role == 'admin' %}
+            <p>Welcome, Admin!</p>
+        {% else %}
+            <p>You are a regular user.</p>
+        {% endif %}
+        <div class="hero">
+            <div class="title">
+                <div>
+                    Team members
+                </div>
+                <div><a class="add" href="{% url 'teamManagement:add_member' %}">+</a></div>
             </div>
-            <div><a class="add" href="{% url 'teamManagement:add_member' %}">+</a></div>
-        </div>
-        <div class="subtitle">You have {{ team_members.count }} team members</div>
+            <div class="subtitle">You have {{ team_members.count }} team members</div>
 
-        <div class="list_div">
-            {% for team_member in team_members %}
-                <div class="line"></div>
-                <a class="text" href="{% url 'teamManagement:edit_member' team_member.id %}">
-                    {{ team_member.first_name }} {{ team_member.last_name }} - {{ team_member.get_role_display }}
-                    <p>{{ team_member.phone_number }}</p>
-                    <p>{{ team_member.email }}</p>
-                </a>
-            {% endfor %}
-        </div>
-        <div class="line"></div>
+            <div class="list_div">
+                {% for team_member in team_members %}
+                    <div class="line"></div>
+                    {% if user.role == 'admin' or user.role == 'regular' and team_member.role == 'regular' %}
+                        <a class="text" href="{% url 'teamManagement:edit_member' team_member.id %}">
+                            {{ team_member.first_name }} {{ team_member.last_name }}
+                            - {{ team_member.get_role_display }}
+                            <p>{{ team_member.phone_number }}</p>
+                            <p>{{ team_member.email }}</p>
+                        </a>
+                    {% else %}
+                        <div>
+                            {{ team_member.first_name }} {{ team_member.last_name }}
+                            - {{ team_member.get_role_display }}
+                            <p>{{ team_member.phone_number }}</p>
+                            <p>{{ team_member.email }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="line"></div>
 
-        <!-- Add more content or customize based on your needs -->
-    </div>
+            {% if user.role == 'admin' or user.role == 'regular' and team_member.role == 'regular' %}
+            {% else %}
+                <div>You cannot edit admin users</div>
+            {% endif %}
+
+            <!-- Add more content or customize based on your needs -->
+        </div>
+    {% else %}
+        <div>
+            Please
+            <a href="{% url 'teamManagement:login' %}">Log In .</a>
+        </div>
+    {% endif %}
 {% endblock %}
