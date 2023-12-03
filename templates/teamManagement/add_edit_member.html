@@ -1,0 +1,63 @@
+<!-- edit_member.html -->
+{% extends 'teamManagement/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="hero">
+            <div class="title">{% if 'edit' in request.path %}Edit {% else %} Add a{% endif %} Team Member</div>
+            <div class="subtitle">
+                {% if 'edit' in request.path %}
+                    Edit contact info and role.
+                {% else %}
+                    Set email, location, and role.
+                {% endif %}
+            </div>
+            <p>Info</p>
+            {#  I have not added action because in this case same view will be called when save button is clicked#}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">Last Name:</label>
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">Email:</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.phone_number.id_for_label }}">Phone Number:</label>
+                    {{ form.phone_number }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.role.id_for_label }}">Role:</label>
+                    {{ form.role }}
+                    {{ form.errors.role }}
+                </div>
+                <button type="submit">Save</button>
+            </form>
+
+            {% if 'edit' in request.path %}
+                <form method="post" action="{% url 'teamManagement:delete_member' pk=object.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </div>
+    {% else %}
+        <div>
+            Please
+            <a href="{% url 'teamManagement:login' %}">Log In .</a>
+        </div>
+    {% endif %}
+{% endblock %}
