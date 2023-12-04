@@ -1,13 +1,14 @@
+# Import necessary modules and classes from Django
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 
+# Import custom forms and models from the application
 from .forms import TeamMemberForm, RegistrationForm, LoginForm
 from .models import TeamMember
 
-
-# Create your views here.
+# Define your views below
 
 
 # Team members List View
